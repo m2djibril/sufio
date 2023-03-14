@@ -1,0 +1,223 @@
+<div id="{{ document.id }}" class="{{ document.css_classes }}">
+  <div class="container">
+    <header class="columns">
+      <div class="col-12">
+
+        <!-- Logo -->
+        <div id="{{ account.logo.id }}" class="{{ account.logo.css_classes }}">{{ account.logo.text }}</div>
+
+      </div>
+      <div class="col-3">
+        <div class="table-top-right">
+          <div class="square">
+            <span id="{{ document.name.id }}" class="title {{ document.name.css_classes }}">{{ document.name.text }}</span><br>
+            <span id="{{ document.number.id }}" class="value {{ document.number.css_classes }}">{{ document.number.text }}</span>
+          </div>
+
+          <!-- Dates -->
+          <div id="{{ document.dates.id }}" class="square {{ document.dates.css_classes }}">
+            <div>
+              {% for date in document.dates %}
+                <div id="{{ date.id }}" class="{{ date.css_classes }}">
+                  <span class="title">{{ date.title }}</span>
+                  <span class="value">{{ date.text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <div class="block-info-1">
+      <div class="columns">
+        <div class="{{ 'col-1' if client.shipping.is_visible else 'col-12' }}">
+
+          <!-- Account Details -->
+          <div id="{{ account.id }}" class="{{ account.css_classes }}">
+            <div id="{{ account.heading.id }}" class="{{ account.heading.css_classes }}">{{ account.heading.text }}</div>
+            <div id="{{ account.company_name.id }}" class="{{ account.company_name.css_classes }}">{{ account.company_name.text }}</div>
+            <div id="{{ account.address.id }}" class="{{ account.address.css_classes }}">{{ account.address.text }}</div>
+            <div id="{{ account.details.id }}" class="{{ account.details.css_classes }}">
+              {% for detail in account.details %}
+                <div id="{{ detail.id }}" class="{{ detail.css_classes }}">
+                  <span class="title">{{ detail.title }}:</span>
+                  <span class="value">{{ detail.text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+            <div id="{{ account.notes.id }}" class="{{ account.notes.css_classes }}">{{ account.notes.text }}</div>
+          </div>
+
+        </div>
+        <div class="{{ 'col-2' if client.shipping.is_visible else 'hidden' }}">
+
+          <!-- Shipping -->
+          <div id="{{ client.shipping.id }}" class="{{ client.shipping.css_classes }}">
+            <div id="{{ client.shipping.heading.id }}" class="{{ client.shipping.heading.css_classes }}">{{ client.shipping.heading.text }}</div>
+            <div id="{{ client.shipping.full_name.id }}" class="{{ client.shipping.full_name.css_classes }}">{{ client.shipping.full_name.text }}</div>
+            <div id="{{ client.shipping.company_name.id }}" class="{{ client.shipping.company_name.css_classes }}">{{ client.shipping.company_name.text }}</div>
+            <div id="{{ client.shipping.address.id }}" class="{{ client.shipping.address.css_classes }}">{{ client.shipping.address.text }}</div>
+            <div id="{{ client.shipping.contacts.id }}" class="{{ client.shipping.contacts.css_classes }}">
+              {% for contact in client.shipping.contacts %}
+                <div id="{{ contact.id }}" class="{{ contact.css_classes }}">
+                  <span class="title">{{ contact.title }}:</span>
+                  <span class="value">{{ contact.text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+        <div class="col-3">
+
+          <!-- Client Details -->
+          <div id="{{ client.id }}" class="{{ client.css_classes }}">
+            <div id="{{ client.heading.id }}" class="{{ client.heading.css_classes }}">{{ client.heading.text }}</div>
+            <div id="{{ client.full_name.id }}" class="{{ client.full_name.css_classes }}">{{ client.full_name.text }}</div>
+            <div id="{{ client.company_name.id }}" class="{{ client.company_name.css_classes }}">{{ client.company_name.text }}</div>
+            <div id="{{ client.address.id }}" class="{{ client.address.css_classes }}">{{ client.address.text }}</div>
+            <div id="{{ client.details.id }}" class="{{ client.details.css_classes }}">
+              {% for detail in client.details %}
+                <div id="{{ detail.id }}" class="{{ detail.css_classes }}">
+                  <span class="title">{{ detail.title }}:</span>
+                  <span class="value">{{ detail.text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+            <div id="{{ client.contacts.id }}" class="{{ client.contacts.css_classes }}">
+              {% for contact in client.contacts %}
+                <div id="{{ contact.id }}" class="{{ contact.css_classes }}">
+                  <span class="title">{{ contact.title }}:</span>
+                  <span class="value">{{ contact.text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+            <div id="{{ client.notes.id }}" class="{{ client.notes.css_classes }}">{{ client.notes.text }}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="block-info-2">
+      <div class="columns">
+        <div class="col-12">
+
+          <!-- Payments -->
+          <div id="{{ document.payments.id }}" class="{{ document.payments.css_classes }}">
+            {% for payment in document.payments %}
+              <div id="{{ payment.id }}" class="{{ payment.css_classes }}">
+                <span class="title">
+                  <span class="content">{{ payment.title }}</span>
+                </span>
+                <span class="value">
+                  <span class="content">{{ payment.text }}</span>
+                </span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="col-3">
+
+          <!-- Notes -->
+          <div id="{{ document.thanks.id }}" class="{{ document.thanks.css_classes }}">{{ document.thanks.text }}</div>
+          <div id="{{ document.legal.id }}" class="{{ document.legal.css_classes }}">{{ document.legal.text }}</div>
+          <div id="{{ document.notes.id }}" class="{{ document.notes.css_classes }}">{{ document.notes.text }}</div>
+
+          <!-- Barcodes -->
+          <div id="{{ document.barcodes.id }}" class="{{ document.barcodes.css_classes }}">
+          	{% for barcode in document.barcodes %}
+          	  <div id="{{ barcode.id }}" class="{{ barcode.css_classes }}">
+                {{ barcode.text }}
+              </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Lines -->
+    <table id="{{ document.lines.id }}" class="{{ document.lines.css_classes }}">
+      <thead>
+        <tr>
+          {% for title in document.lines_titles %}
+            <th id="{{ title.id }}" class="{{ title.css_classes }}">{{ title.text }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for line in document.lines %}
+          <tr id="{{ line.id }}" class="{{ line.css_classes }}">
+            {% for item in line %}
+              <td id="{{ item.id }}" class="{{ item.css_classes }}">{{ item.text }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="columns">
+      <div class="col-12">
+
+        <!-- Stamp -->
+        <div id="{{ account.stamp.id }}" class="{{ account.stamp.css_classes }}">{{ account.stamp.text }}</div>
+
+      </div>
+      <div class="col-3">
+
+        <!-- Totals -->
+        <table id="{{ document.totals.id }}" class="{{ document.totals.css_classes }}">
+          {% for total in document.totals %}
+            <tr id="{{ total.id }}" class="{{ total.css_classes }}">
+              <th>{{ total.title }}</th>
+              <td>{{ total.text }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="{{ account.contacts.css_classes }}">
+      <div id="{{ account.contacts.company_name.id }}" class="{{ account.contacts.company_name.css_classes }}">
+        <span class="title">{{ account.contacts.company_name.title }}</span>
+        <span class="value">{{ account.contacts.company_name.text }}</span>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="col-12">
+
+        <!-- Account Contacts -->
+        <div id="{{ account.contacts.id }}" class="{{ account.contacts.css_classes }}">
+          <div class="columns">
+            {% for column in account.contacts.values() | select('is_visible') | reject('id', '==', 'account-contacts-company-name') | chunk(2) %}
+              <div class="col-{{ loop.index }}">
+                {% for contact in column %}
+                  <div id="{{ contact.id }}" class="{{ contact.css_classes }}">
+                    <span class="title">{{ contact.title }}</span>
+                    <span class="value">{{ contact.text }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+      <div class="col-3">
+
+        <!-- Links -->
+        <div id="{{ document.public_link.id }}" class="{{ document.public_link.css_classes }}">{{ document.public_link.text }}</div>
+        <div id="{{ document.sufio_link.id }}" class="{{ document.sufio_link.css_classes }}">{{ document.sufio_link.text }}</div>
+        
+        <div id="page-number"></div>
+
+      </div>
+    </div>
+  </footer>
+</div>
