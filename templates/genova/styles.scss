@@ -1,0 +1,507 @@
+// Genova
+
+// Constants
+
+$page-padding: 3.5em;
+$font-color: #404040;
+$dark-font-color: #333;
+$scheme-font-color: contrast-color($background-color, $scheme-color, $font-color);
+$contrast-font-color: contrast-color($scheme-color, #fff, $dark-font-color);
+$contrast-line-color: contrast-color($scheme-color, #fff, $dark-font-color);
+$grey-color: #646464;
+$grey-light-color: complementary-grey($scheme-color, .8, .2);
+$line-padding: 0.9em;
+$footer-height: 14em;
+
+
+// Layout
+
+$column-first-width: 26;
+$column-middle-width: 26;
+$column-last-width: 48;
+$columns: $column-first-width $column-middle-width $column-last-width;
+$gutter: 4;
+
+@include generate-columns($columns, $gutter);
+
+
+// Custom columns
+
+.col-3 {
+  padding-#{$left}: 0;
+}
+
+
+// Document
+
+& {
+  @include document-defaults;
+  @include formatting-defaults($bold: 700, $bold-color: $dark-font-color);
+  @include footer;
+  font-family: $font-family;
+  font-weight: 400;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: $font-color;
+}
+
+.container {
+  padding: $page-padding;
+}
+
+.document {
+  font-size: $font-zoom * 1em;
+
+  &.html {
+    background: $background;
+    background-size: $background-size;
+    background-repeat: $background-repeat;
+    background-position: $background-position;
+  }
+}
+
+// PDF Document
+@include pdf-document {
+  background: $background;
+  background-size: $background-size;
+  background-repeat: $background-repeat;
+  background-position: $background-position;
+  
+  margin-bottom: $footer-height - $page-padding;
+  
+  @bottom {
+    content: flow(footer);
+  }
+  
+}
+
+@include pdf-document-media {
+  footer {
+    flow: static(footer, start);
+  }
+ 
+  #page-number {
+    text-align: right;
+    color: #646464;
+    font-size: .9em;
+  }
+  
+  #page-number:after {
+      counter-increment: page;
+      content: counter(page);
+  }
+}
+
+
+// Elements
+
+a {
+  color: $dark-font-color;
+}
+
+
+
+// Mixins and classes
+
+.hidden {
+  display: none;
+}
+
+@mixin dots {
+  content: "\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022\2022";
+  font-size: .3em;
+  color: $font-color;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 1em;
+  line-height: 1;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: $dark-font-color;
+}
+
+.heading-small {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.note {
+  font-size: .9em;
+  margin-top: .5em;
+}
+
+.block-info-1 {
+
+  .col-2, .col-3 {
+    border-#{$left}: .05em solid rgba($font-color, .5);
+    padding-#{$left}: 1.5em;
+  }
+}
+
+.block-info-1, .block-info-2 {
+
+  &:after {
+    @include dots;
+    margin: 7em 0;
+  }
+}
+
+
+// Header
+
+header {
+  @include no-page-break;
+  margin-bottom: 4em;
+}
+
+.table-top-right {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  .square {
+    display: table-cell;
+    padding: 1em 1.8em;
+    vertical-align: bottom;
+    background: $grey-light-color;
+
+    .value {
+      @extend .heading;
+    }
+  }
+}
+
+
+// Logo
+
+#account-logo {
+  @include resizable(12em);
+  margin-top: .5em;
+}
+
+
+// Dates
+
+#dates {
+  background: $scheme-color;
+  @include selection-inverse;
+  text-align: $right;
+
+  .title, .value {
+    display: block;
+    color: $contrast-font-color;
+  }
+
+  .date {
+    text-align: right;
+
+    .value {
+      border-bottom: .05em solid rgba($contrast-line-color, .5);
+      padding-bottom: .2em;
+      margin-bottom: .4em;
+    }
+
+    &:last-child {
+
+      .value {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+
+// Stamp
+
+#account-stamp {
+  @include resizable(10em);
+  margin-top: 3em;
+}
+
+
+// Client Details
+
+#client-heading {
+  @extend .heading-small;
+}
+
+#client-company-name {
+  @extend .heading;
+}
+
+#client-notes {
+  @extend .note;
+}
+
+#client-full-name {
+  @extend .heading;
+}
+
+
+// Account Details
+
+#document-account-heading {
+  @extend .heading-small;
+}
+
+#account-company-name {
+  @extend .heading;
+}
+
+#account-notes {
+  @extend .note;
+}
+
+
+// Shipping
+
+#client-shipping-heading {
+  @extend .heading-small;
+}
+
+#client-shipping-full-name, #client-shipping-company-name {
+  @extend .heading;
+}
+
+
+// Payments
+
+#payments {
+  width: 100%;
+  display: table;
+  font-size: .9em;
+  text-transform: uppercase;
+
+  .payment {
+    display: table-row;
+  }
+
+  .title, .value {
+    display: table-cell;
+    padding-bottom: .5em;
+
+    .content {
+      border-bottom: .05em solid rgba($font-color, .5);
+    }
+  }
+
+  .title {
+    width: 54%;
+
+    .content {
+      display: block;
+    }
+  }
+
+  .value {
+    font-weight: 700;
+    color: $dark-font-color;
+
+    .content {
+      display: inline-block;
+    }
+  }
+}
+
+#document-payments-bank-account {
+
+  .value {
+    word-break: break-all;
+  }
+}
+
+
+// Lines
+
+#lines {
+  width: 100%;
+  margin-top: 3em;
+
+  th, td {
+    padding: $line-padding .5em;
+
+    &.number, &.amount, &.percentage {
+      text-align: $right;
+    }
+
+    &.quantity {
+      text-align: center;
+    }
+
+    &:first-child {
+      padding-#{$left}: 1em;
+    }
+
+    &:last-child {
+      padding-#{$right}: 1em;
+    }
+  }
+
+  thead {
+    display: table-row-group;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $scheme-font-color;
+
+    th {
+      padding-top: 0;
+    }
+  }
+
+  tbody {
+
+    td {
+
+      &.item, &.quantity, &.total {
+        font-weight: 700;
+        color: $dark-font-color;
+      }
+    }
+
+    tr:nth-child(odd) {
+      background: $grey-light-color;
+    }
+  }
+}
+
+
+// Totals
+
+#totals {
+  width: 100%;
+  color: $dark-font-color;
+
+  th, td {
+    padding: $line-padding 1em;
+  }
+
+  th {
+    padding-#{$left}: 1.8em;
+  }
+
+  td {
+    text-align: $right;
+    font-weight: 700;
+  }
+
+  tr:last-child {
+    font-weight: 700;
+    background: $scheme-color;
+    color: $contrast-font-color;
+    @include selection-inverse;
+
+    th {
+      text-transform: uppercase;
+    }
+  }
+}
+
+#lines.even ~ * #totals tr:nth-child(odd):not(:last-child),
+#lines.odd ~ * #totals tr:nth-child(even):not(:last-child) {
+  background-color: $grey-light-color;
+}
+
+
+// Thank you notes
+
+#document-thanks {
+  font-size: 2.1em;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-top: -.1em;
+  margin-bottom: .2em;
+  color: $dark-font-color;
+}
+
+#document-legal {
+  @extend .note;
+  margin-top: 0;
+  margin-bottom: .5em;
+}
+
+#document-notes {
+  @extend .note;
+  margin-top: 0;
+}
+
+
+// Links
+
+#document-public-link {
+
+  a {
+    color: $scheme-color;
+  }
+}
+
+
+// Account contacts
+
+#account-contacts {
+
+  .title {
+
+    &:after {
+      content: ':';
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .contact {
+    color: $grey-color;
+    display: inline-block;
+
+    .title {
+      margin-#{$right}: .5em;
+
+      &:after {
+        content: ':';
+      }
+    }
+  }
+
+  .company-name {
+    text-transform: uppercase;
+
+    .value {
+      @extend .heading;
+    }
+  }
+}
+
+
+// Footer
+
+footer {
+  color: $grey-color;
+  font-size: .9em;
+  line-height: 1.5;
+  padding: $page-padding;
+
+  a {
+    color: $grey-color;
+  }
+}
+
+// Barcodes
+
+#barcodes {
+  margin: -1.5em;
+  padding-top: 2em;
+
+  .barcode {
+    padding: 1.5em;
+  }
+}
